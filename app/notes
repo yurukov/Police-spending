@@ -1,0 +1,28 @@
+if [ -s "../lists" ]; then mkdir ../lists; fi;
+if [ -s "../reports" ]; then mkdir ../reports; fi;
+if [ -s "../txt" ]; then mkdir ../txt; fi;
+if [ -s "../csv" ]; then mkdir ../csv; fi;
+if [ -s "../csvi" ]; then mkdir ../csvi; fi;
+for i in `cat list`; do then wget -O "../lists/"$i".html" "http://www.mvr.bg/Planirane_otchetnost/Budjet_fin_otchetnost/SEBRA/20$i.htm"; done
+for i in `cat list`; do grep "/NR/rdonlyres/" "../lists/$i.html" | sed 's_.*href="__;s_".*__'; done > list1
+mkdir reports
+for i in `cat list1`; do b=`echo $i|sed 's_.*/__'`; if [ -s "../reports/"$b ]; then wget -O "../reports/"$b "http://www.mvr.bg$i"; fi; done
+mkdir txt
+for i in `cat list1| sed 's_.*/__;s_\.pdf__'`; do pdftotext -layout -nopgbrk "../reports/$i.pdf" "../txt/$i.txt"; done
+mkdir csv
+for i in `cat list1| sed 's_.*/__;s_\.pdf__' | grep -v 20120926 | grep -v 20121227 | grep -v 20130903`; do php parse.php "txt/$i.txt" > "csv/$i.csv"; done
+grep error csv/*
+
+grep " - " csv/* | sed 's_.*csv:__;s_,.*__' | sort -nu > names
+grep " - " csv/* | sed 's_.*csv:__;s_ -.*__;s_\*_\\*_g' | sort -nu > codes
+mkdir csvi
+for i in `cat codes`; do n=`grep "$i" names`; echo -n "$n" > "csvi/$n.csv"; head -1 csv/20120801.csv | sed 's_.\{10\}__' >>"csvi/$n.csv"; grep "$i" csv/* | sed 's_csv/__;s_\.csv:[^,]*__;s_\(....\)\(..\)\(..\)_\1-\2-\3_' >> "csvi/$n.csv"; done
+echo -n "Всички" > "csvi/Всички.csv"; head -1 csv/20120801.csv | sed 's_.\{10\}__' >> "csvi/Всички.csv"; grep " - " csv/* | sed 's_csv/__;s_\.csv:[^,]*__;s_\(....\)\(..\)\(..\)_\1-\2-\3_' >> "csvi/Всички.csv"
+
+#codes at:
+http://www.minfin.bg/bg/transparency
+
+#issues with:
+txt/20120926.txt - wrong sum in second line in original
+txt/20121227.txt - no line with all sums
+txt/20130903.txt - no line with all sums

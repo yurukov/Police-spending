@@ -1,0 +1,13 @@
+body {
+	font-size: 0.9em;
+	font-family: Lucida;
+}
+
+a {
+	color: #3182bd;
+}
+
+.content {
+width:700px;
+margin: 0 auto 100px;
+}
