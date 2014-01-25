@@ -15,12 +15,16 @@ while ($m = mb_ereg_search_regs("\d\d ....","msr"))
 	$header[]=substr(trim($m[0]),0,2);
 $header[]="sum";
 
-for ($i=1;$i<count($l);$i++) {
+for ($i=1;$i<count($l);$i++) 
+if (trim($l[$i])!="" && trim($l[$i])!="Организация") {
 	$l[$i]=rtrim($l[$i]);
 	mb_ereg_search_init($l[$i]);
 	$d = array("");
+	if (count($data)>1 && $data[count($data)-1][0]=="")
+		$d = $data[count($data)-1];
 	$offset=0;
-	$m = mb_ereg_search_regs(".{10} - .*?(?=  +-?\d)","msr");
+	$m = mb_ereg_search_regs(".{10} - .*?((?=  +-?\d)|$)","msr");
+
 	if ($m) {
 		$offset = strlen($m[0]) - mb_strlen($m[0]);
 		$d[0]=str_replace(",","",$m[0]);
@@ -35,7 +39,12 @@ for ($i=1;$i<count($l);$i++) {
 		$cols=count($d);
 	else if (!$pos && count($d)==$cols)
 		$pos = $d;
-	$data[]=$d;
+
+	if (count($data)>1 && $data[count($data)-1][0]=="") {
+		usort($d,"sortPre");
+		$data[count($data)-1] = $d;
+	} else
+		$data[]=$d;
 }
 
 $emptyd = array();
@@ -63,7 +72,6 @@ for ($i=0;$i<count($data);$i++) {
 		for ($j=1;$j<count($d);$j++)
 			$sums[$j]+=$d[$j];
 	$data[$i]=$d;
-//	print_r($data[$i]);
 }
 
 if (isset($argv[2])) {
@@ -95,6 +103,14 @@ for ($i=1;$i<count($data);$i++) {
 	$data[$i]=implode(",",$d);
 }
 echo implode("\n",$data);
+
+function sortPre($a,$b) {
+	if (is_string($a))
+		return -1;
+	if (is_string($b))
+		return 1;
+	return $a[1]<$b[1]?-1:1;
+}
 
 
 ?>

@@ -8,23 +8,23 @@
 
 	<meta charset="UTF-8">
 
-	<link rel="stylesheet" type="text/css" href="/spending/mvr/res/style.css"/>
-
+	<link type="text/css" href="/lib/res/dc.160.css" rel="stylesheet"/>
+	<link rel="stylesheet" type="text/css" href="/spending/mvr/res/style.css?ynocache"/>
 
 	<meta http-equiv="author" content="Boyan Yurukov" />
 	<meta http-equiv="contact" content="boyan@yurukov.net" />
 	<meta name="keywords" content="opendata, отворени данни, мвр, полиция, дирекции, подслушване, заплати, българия" />
 
-	<link rel="image_src" type="image/jpg" href="/spending/mvr/res/zaplati_sdvr.png" />
+	<link rel="image_src" type="image/png" href="/spending/mvr/res/mvrspending.png" />
 	<meta itemprop="name" content="Данни за бюджетните плащания на МВР"/>
 	<meta itemprop="description" content="Отворени данни за ежедневните бюджетни плащания до всички дирекции на МВР"/>
-	<meta itemprop="image" content="/spending/mvr/res/zaplati_sdvr.png"/>
+	<meta itemprop="image" content="/spending/mvr/res/mvrspending.png"/>
 
 	<meta property="og:url" content="http://opendata.yurukov.net/spending/mvr/" />
 	<meta property="og:type" content="website" />       
 	<meta property="og:title" content="Данни за бюджетните плащания на МВР" />
 	<meta property="og:description" content="Отворени данни за ежедневните бюджетни плащания до всички дирекции на МВР" />
-	<meta property="og:image" content="http://opendata.yurukov.net/spending/mvr/res/zaplati_sdvr.png" /> 
+	<meta property="og:image" content="http://opendata.yurukov.net/spending/mvr/res/mvrspending.png" /> 
 </head>
 <body>
 
@@ -32,35 +32,92 @@
 
 <h1>Данни за бюджетните плащания на МВР</h1>
 
-<div style="float:left; margin-right:20px; padding:5px 15px 150px 0; border-right:1px dashed gray; ">
+<div class="column0">
 <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fopendata.yurukov.net%2Fspending%2Fmvr&amp;send=false&amp;layout=box_count&amp;width=80&amp;show_faces=false&amp;font=verdana&amp;colorscheme=light&amp;action=like&amp;height=65&amp;appId=213681481985740" 
 scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:100px; height:65px;" allowTransparency="true"></iframe>
 <br/>
 <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://opendata.yurukov.net/spending/mvr/" data-via="yurukov" data-count="vertical">Tweet</a>
 </div>
 
+<div class="column1">
 <p>
 Със заповед на МС всички бюджетни ведомства трябва да публикуват на страниците си ежедневни отчети за преводите на бюджетни средства по СЕБРА.
-Тъй като няма изискване в какъв формат да са тези отчети, всяко ведомство ги публикува какво реши. Това прави почти невъзможен анализа и практически обезсмисля
-отчетите.
+Тъй като няма изискване в какъв формат да са тези отчети, всяко ведомство ги публикува какво реши. Това прави почти невъзможен анализа и практически обезсмисля отчетите.
 </p>
 <p>
 МВР <a href="http://www.mvr.bg/Planirane_otchetnost/Budjet_fin_otchetnost/default.htm">пуска</a> докладите в PDF файлове, в които има таблица с плащанията към всяка дирекция. Написах скрипт, който да ги изчита и трансформира
-в удобни CSV файлове. Те могат да се отворят с Excel или който и да е инстумент за анализ на данни. Данните може да свалите като <b><a href="http://opendata.yurukov.net/spending/mvr/mvr_csv.zip">ZIP файл</a></b>. В него има две папки - справки по дни и справки по дирекции. При справките по дирекции ще намерите и всички преводи в един общ файл. Данните се обновяват всеки ден в 01:00 с плащанията за предишния.
+в удобни CSV файлове. Те могат да се отворят с Excel или който и да е инстумент за анализ на данни. Данните може да свалите като <b><a href="http://opendata.yurukov.net/spending/mvr/mvr_csv.zip">ZIP файл</a></b>. В него има две папки - справки по дни и справки по дирекции. При справките по дирекции ще намерите и всички преводи в един общ файл. Данните се обновяват всеки ден в 01:00 с плащанията за предишния. Понякога обаче МВР забавя докладите с няколко дни.
 </p>
 <p> 
-Кодът на проекта ще намерите в <a href="https://github.com/yurukov/Police-spending">GitHub</a>. По-долу ще видите няколко графики, които пуснах във Facebook.
+Кодът на проекта ще намерите в <a href="https://github.com/yurukov/Police-spending">GitHub</a>. Кодът на графиките ще бъде добавен там скоро.
 </p>
 <p>
 Боян Юруков<br/>
 <a href="https://twitter.com/yurukov">twitter</a> | <a href="http://yurukov.net/blog">blog</a> | <a href="https://www.facebook.com/boyan.yurukov">facebook</a><br/>
 </p>
 </div>
-<p style="text-align:center;"> 
-<img alt="Преводите за заплати в СДВР" src="/spending/mvr/res/zaplati_sdvr.png"/><br/>
-Преводите за заплати в цялото министерство:<br/>
-<img alt="Преводите за заплати в цялото министерство" src="/spending/mvr/res/kat_b2.png"/>
+
+<div class="column2">
+<p>
+На графиката "Плащания общо по месеци" може да изберете период за справката. Втората графика ще покаже плащанията по дни за избрания период. Ако изберете дати след 1 август 2013, на таблиците ще се покаже промяна в % на база същия период година по-рано. 
 </p>
+<p>
+Двете таблици показват причините за плащанията и дирекциите. Може да използвате CTRL и SHIFT, за да избирате повече полета, както с нормална таблица. Над таблиците и първата графика има бързи линкове към интересни критерии и за изчистване.
+</p>
+<p>
+Ще забележите, че при обновяване на избраните критерии (период, дирекция, причина), линкът в browser-а ви се сменя. Ако споделите или изпратите обновения линк, при отваряне на страницата ще се отвори със същите критерии, които вие сте прегледали. Например:
+<a href="javascript:;" onclick="filter('130614,140119&01');">плащанията за заплати</a> по време на #дансwithme, <a href="javascript:;" onclick="filter('130128,130316&&37,12');">плащанията в София</a> по време на антимонополните протести, <a href="javascript:;" onclick="filter('&10&14');">издръжката</a> на Гранична полиция или <a href="javascript:;" onclick="filter('130801,140119&88');">сравнение на "Средства за разпореждане"</a> спрямо правителството на ГЕРБ
+
+</p>
+</div>
+
+<p class="clear" style="border-bottom:1px dashed gray; padding-bottom:5px; text-align:right;">
+	<a href="javascript:;" onClick="reset();">Изчисти всички филтри</a>
+<p>
+<div id="loading">Зарежда се...</div>
+<div id="charts" class="hidden">
+	<div id="chart-text-box">
+		<h3>С няколко думи...</h3>
+		<p id="chart-text"></p>
+	</div>
+
+	<div id="chart-entityList-box">
+		<h3>Дирекции</h3>
+		<div id="chart-entityList-links">
+			Филтри: <a href="javascript:;" onclick="window.quickfilter4noMVR();">без министерството</a> |
+			<a href="javascript:;" onclick="window.quickfilter4OD();">само ОД</a> | 
+			<a href="javascript:;" onclick="window.quickfilter4Reset();">изчисти</a>
+		</div>
+		<div id="chart-entityList"></div>
+	</div>
+	<div id="chart-byMonth">
+		<h3>Плащания общо по месеци</h3>
+		<div id="chart-byMonth-links">
+			Филтри: <a href="javascript:;" onclick="window.quickfilter0antimonopol();">антимонопол</a> | 
+			<a href="javascript:;" onclick="window.quickfilter0danswithme();">#дансwithme</a> | 
+			<a href="javascript:;" onclick="window.quickfilter0afterAug();">сравнение</a> | 
+			<a href="javascript:;" onclick="window.quickfilter0Reset();">изчисти</a>
+		</div>
+	</div>
+	<div id="chart-byDay"><h3>Плащания по дни</h3></div>
+	<div id="chart-reason"><h3>Причини за плащания</h3></div>
+	<div id="chart-reasonList-box">
+		<div id="chart-reasonList-links">
+			Филтри: <a href="javascript:;" onclick="window.quickfilter3Reset();">изчисти</a>
+		</div>
+		<div id="chart-reasonList"></div>
+	</div>
+<div>
+
+</div>
+
+<div class="clear">.</div>
+<script type="text/javascript" src="/lib/res/d3.v3.js"></script>
+<script type="text/javascript" src="/lib/res/crossfilter.js"></script>
+<script type="text/javascript" src="/lib/res/dc.160.js"></script>
+
+<script type="text/javascript" src="/spending/mvr/res/charts.lib.js?ynocache"></script>
+<script type="text/javascript" src="/spending/mvr/res/charts.js?ynocache"></script>
 
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 

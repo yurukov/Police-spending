@@ -7,7 +7,140 @@ a {
 	color: #3182bd;
 }
 
+h1 {
+	text-align:center;
+}
+
 .content {
-width:700px;
-margin: 0 auto 100px;
+	width:1060px;
+	margin: 0 auto 100px;
+}
+
+.clear{
+	clear:both;
+}
+
+.column0 {
+	float:left; 
+	padding:5px 15px 150px 0; 
+	border-right:1px dashed gray; 
+	margin-right:20px; 
+}
+.column1 {
+	float:left;
+	width:450px;
+	border-right:1px dashed gray; 
+	padding:5px 15px 0 0; 
+	margin-right:20px; 
+	display:inline;
+}
+.column2 {
+	padding:5px 15px 0 0; 
+}
+
+.dc-table-label, .dc-table-column {
+	border-bottom:1px solid #ddd;
+	padding:8px;
+	cursor:pointer;
+}
+
+.dc-table-label {
+	background:#d9edf7;
+}
+
+.dc-table-select {
+	background:#f0f0f0;
+}
+
+#charts {
+}
+
+#loading {
+	text-align:center;
+	font-size:1.1em;
+	padding:30px;
+}
+.hidden {
+	display:none;
+}
+
+#chart-text {
+	font-size:1.1em;
+	height:62px;
+	padding:0px 30px;
+}
+
+#chart-entityList-box {
+	clear:both;
+	float:right;
+}
+
+#chart-entityList {
+	width:360px;
+	border-top:1px solid #ddd;
+	border-bottom:1px solid #ddd;
+}
+
+#chart-entityList tbody {
+	height:810px;
+	overflow-y:scroll;
+	display:block;
+}
+
+#chart-entityList td._0 {
+	width:220px;
+}
+
+#chart-entityList td._1 {
+	width:80px;
+	text-align:right;
+}
+
+#chart-entityList td._2 {
+	width:60px;
+	text-align:right;
+}
+
+#chart-reasonList-box {
+	width:380px;
+	margin-top:20px;
+	float:left;
+}
+#chart-reasonList {
+	width:380px;
+	border-top:1px solid #ddd;
+	border-bottom:1px solid #ddd;
+}
+
+#chart-reasonList tbody {
+	height:320px;
+	overflow-y:scroll;
+	display:block;
+}
+
+#chart-reasonList td._0 {
+	width:240px;
+}
+
+#chart-reasonList td._1 {
+	width:80px;
+	text-align:right;
+}
+
+#chart-reasonList td._2 {
+	width:60px;
+	text-align:right;
+}
+
+#chart-entityList-links, #chart-reasonList-links, #chart-byMonth-links {
+	text-align:right;
+}
+
+#chart-reasonList, #chart-entityList {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
