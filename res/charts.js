@@ -2,6 +2,8 @@
 
 var dateFormat = d3.time.format("%y%m%d");
 var dateFormatL = d3.time.format("%d.%m.%Y");
+var dateFormatI = d3.time.format("%Y-%m-%d");
+var dateFormatF = d3.time.format("%Y%m%d%H%M%S");
 var percFormat = d3.format(".1%");
 var percFormatB = d3.format(".2%");
 var amountFormatD = d3.format("d");
@@ -370,7 +372,7 @@ function displayText() {
 			var prevAmount=0;
 			var origFilter = dc.chartRegistry.list()[3].filters()
 			ppReasonG.all().forEach(function(d) {
-				if (origFilter.indexOf(d.key)!=-1)
+				if (origFilter.length==0 || origFilter.indexOf(d.key)!=-1)
 					prevAmount+=d.value;
 			});
 			if (prevAmount!=0) {
@@ -382,11 +384,11 @@ function displayText() {
 					pT=" Това е увеличение в <b>"+amountFormatD(Math.round(diff))+" пъти</b> спрямо преведените "+
 						amountFormat(prevAmount)+" лв. предходната година. ";
 				else if (diff>0)
-					pT=" Това е увеличение с <b>"+percFormatB(diff)+"</b> или <b>"+
-						amountFormat(aT-prevAmount)+" лв.</b> спрямо предходната година. ";
+					pT=" Това е увеличение с <b>"+percFormatB(diff)+"</b> ("+
+						amountFormat(aT-prevAmount)+" лв.) спрямо предходната година. ";
 				else 
-					pT=" Това е намаление с <b>"+percFormatB(-diff)+"</b> или <b>"+
-						amountFormat(prevAmount-aT)+" лв.</b> спрямо предходната година. ";
+					pT=" Това е намаление с <b>"+percFormatB(-diff)+"</b> ("+
+						amountFormat(prevAmount-aT)+" лв.) спрямо предходната година. ";
 			} else
 				pT=" Не са правени такива плащания предходната година.";
 		}
@@ -478,6 +480,44 @@ function manageFiltered(chart,filter) {
 	}
 }
 
+window.prepareDownload = function() {
+	var filter = dc.chartRegistry.list()[3].filters();
+	if (filter.length==0) {
+		rD.forEach(function(d) {
+			filter.push(d.code);
+		});
+	}
+	var data = "Дата,Име";
+	filter.forEach(function(d) {
+		data+=","+reason[d].shortname;
+	});
+	data+=",Общо";
+	
+	var pDi = [];
+	dc.chartRegistry.list()[0].dimension().top(Infinity).forEach(function(d) {
+		if (pDi.indexOf(d.orig)==-1)
+			pDi.push(d.orig);
+	});
+	pD.forEach(function(row,i) {
+		if (pDi.indexOf(i)==-1)
+			return;
+		data+="\n"+dateFormatI(row.date)+","+eD[row.entityid-1].name;
+		var sum = 0;
+		filter.forEach(function(d) {
+			if (row[d] && row[d]>0) {
+				data+=","+amountFormatF(row[d]);
+				sum+=row[d];
+			} else {
+				data+=",0";
+			}
+		});
+		data+=","+(sum!=0 ? amountFormatF(sum) : 0);
+	});
+	
+	var blob = new Blob([data], { type: 'text/csv' });
+	this.download = "mvr-spending-opendata-"+dateFormatF(new Date())+".csv";
+	this.href=URL.createObjectURL(blob);
+}
 
 window.quickfilter0Reset = function() {
 	dc.chartRegistry.list()[0].filterAll();

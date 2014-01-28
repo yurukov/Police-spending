@@ -16,7 +16,7 @@ dc.dataGroupedTable = function(parent, chartGroup) {
         return d;
     };
     var _order = d3.ascending;
-    var _sort = _sort = crossfilter.quicksort.by(_sortBy);
+    var _sort = crossfilter.quicksort.by(_sortBy);
     var _nestedGroup;
     var _header;
     var _keyEvent=null;

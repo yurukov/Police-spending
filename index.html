@@ -49,7 +49,7 @@ scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:100px;
 в удобни CSV файлове. Те могат да се отворят с Excel или който и да е инстумент за анализ на данни. Данните може да свалите като <b><a href="http://opendata.yurukov.net/spending/mvr/mvr_csv.zip">ZIP файл</a></b>. В него има две папки - справки по дни и справки по дирекции. При справките по дирекции ще намерите и всички преводи в един общ файл. Данните се обновяват всеки ден в 01:00 с плащанията за предишния. Понякога обаче МВР забавя докладите с няколко дни.
 </p>
 <p> 
-Кодът на проекта ще намерите в <a href="https://github.com/yurukov/Police-spending">GitHub</a>. Кодът на графиките ще бъде добавен там скоро.
+Повече за проекта може да <a href="http://yurukov.net/blog/2014/01/27/biudjet-na-policiqta/">прочетете в блога ми</a>. Кодът ще намерите в <a href="https://github.com/yurukov/Police-spending">GitHub</a> заедно с графиките и скриптовете за теглене на данните. Оригиналните доклади от МВР са <a href="/spending/mvr/reports/">кеширани тук</a>. Данните ще намерите и в <a href="http://datahub.io/dataset/police-budget-spending">TheDataHub</a>.
 </p>
 <p>
 Боян Юруков<br/>
@@ -66,16 +66,24 @@ scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:100px;
 </p>
 <p>
 Ще забележите, че при обновяване на избраните критерии (период, дирекция, причина), линкът в browser-а ви се сменя. Ако споделите или изпратите обновения линк, при отваряне на страницата ще се отвори със същите критерии, които вие сте прегледали. Например:
-<a href="javascript:;" onclick="filter('130614,140119&01');">плащанията за заплати</a> по време на #дансwithme, <a href="javascript:;" onclick="filter('130128,130316&&37,12');">плащанията в София</a> по време на антимонополните протести, <a href="javascript:;" onclick="filter('&10&14');">издръжката</a> на Гранична полиция или <a href="javascript:;" onclick="filter('130801,140119&88');">сравнение на "Средства за разпореждане"</a> спрямо правителството на ГЕРБ
-
+<a href="javascript:;" onclick="filter('130614,140119&01');">плащанията за заплати</a> по време на #дансwithme, <a href="javascript:;" onclick="filter('130128,130316&&37,12');">плащанията в София</a> по време на антимонополните протести, <a href="javascript:;" onclick="filter('&10&14');">издръжката</a> на Гранична полиция или <a href="javascript:;" onclick="filter('130801,140119&88');">сравнение на "Средства за разпореждане"</a> спрямо правителството на ГЕРБ.
+</p>
+<p>
+С иконката вляво над графиките може да свалите CSV/Еxcel таблица съдържаща само плащанията, които се избрали на това табло. Това означава, че ако <a href="javascript:;" onclick="filter('130929,140105&01&12');">филтрирате</a> по последните 3 месеца на 2013-та и плащанията за заплати от СДВР, натискайки иконката за сваляне ще свалите файл с една колони <i>Дата, Име, "Заплати и възнаграждения" и Общо</i> и 17 реда с плащания по дати.
 </p>
 </div>
 
 <p class="clear" style="border-bottom:1px dashed gray; padding-bottom:5px; text-align:right;">
-	<a href="javascript:;" onClick="reset();">Изчисти всички филтри</a>
+	<a href="javascript:;" onClick="reset();" download="mvr-spending-opendata.csv">Изчисти всички филтри</a>
 <p>
 <div id="loading">Зарежда се...</div>
 <div id="charts" class="hidden">
+	<div id="chart-download-box">
+		<a href='javascript:;' target="_blank" onclick="window.prepareDownload.call(this);" download="mvr_spending_opendata.csv">
+			<img src="/spending/mvr/res/csv-download.gif" alt="Свалете избраните плащания като CSV таблица" title="Свалете избраните плащания като CSV таблица"/>
+		</a>
+	</div>
+
 	<div id="chart-text-box">
 		<h3>С няколко думи...</h3>
 		<p id="chart-text"></p>
